@@ -3,13 +3,29 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  
+  /* Theme color tokens - will be generated dynamically */
+  --accent1: #3b82f6;
+  --accent1-600: #2563eb;
+  --accent1-400: #60a5fa;
+  --accent1-200: #bfdbfe;
+  
+  --accent2: #8b5cf6;
+  --accent2-600: #7c3aed;
+  --accent2-400: #a78bfa;
+  --accent2-200: #ddd6fe;
+  
+  --accent3: #f59e0b;
+  --accent3-600: #d97706;
+  --accent3-400: #fbbf24;
+  --accent3-200: #fde68a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-ubuntu);
+  --font-mono: var(--font-ubuntu-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +38,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-ubuntu), system-ui, sans-serif;
 }
