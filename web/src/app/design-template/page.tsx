@@ -1,0 +1,562 @@
+/**
+ * Design Template Page
+ * Comprehensive test page for theme system and components
+ */
+
+'use client';
+
+import { FloatingNavigation } from '@/components/FloatingNavigation';
+import { ContactModal } from '@/components/ContactModal';
+import { useTheme } from '@/lib/theme/useTheme';
+import { useState, useEffect, useRef, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import engagementsData from '@/data/engagements.json';
+
+function DesignTemplateContent() {
+  // theme state consumed implicitly via CSS vars; avoid unused vars for lint
+  useTheme();
+  const searchParams = useSearchParams();
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [preselectedService, setPreselectedService] = useState<string | undefined>();
+  // Engagement filtering state
+  const [selectedRoleType, setSelectedRoleType] = useState<string>('Product');
+  const [engagementMode, setEngagementMode] = useState<'hire' | 'scoped'>('hire');
+  // Parallax state
+  const vulcanSectionRef = useRef<HTMLDivElement>(null);
+  const [vulcanOffset, setVulcanOffset] = useState(0);
+  
+  const openContactModal = (service?: string) => {
+    setPreselectedService(service);
+    setIsContactModalOpen(true);
+  };
+
+  // Helper functions for engagement filtering
+  const getUniqueRoleTypes = () => {
+    return [...new Set(engagementsData.engagements.map(e => e.roleType))];
+  };
+
+  const getFilteredEngagements = () => {
+    const timeframeOrder = ['Full time', '6 months', 'Fractional', '1 week', '1 day'];
+    const hireTimeframes = ['Full time', 'Fractional'];
+    const scopedTimeframes = ['6 months', '1 week', '1 day'];
+    
+    return engagementsData.engagements
+      .filter(e => e.roleType === selectedRoleType)
+      .filter(e => {
+        if (engagementMode === 'hire') {
+          return hireTimeframes.includes(e.timeframe);
+        } else {
+          return scopedTimeframes.includes(e.timeframe);
+        }
+      })
+      .sort((a, b) => {
+        const aIndex = timeframeOrder.indexOf(a.timeframe);
+        const bIndex = timeframeOrder.indexOf(b.timeframe);
+        return aIndex - bIndex;
+      });
+  };
+
+  const updateUrlParams = (role: string, mode: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('role', role);
+    url.searchParams.set('mode', mode);
+    window.history.replaceState({}, '', url.toString());
+  };
+
+  // Initialize from URL params
+  useEffect(() => {
+    const roleParam = searchParams.get('role');
+    const modeParam = searchParams.get('mode');
+    
+    if (roleParam && ['Product', 'Business', 'Data & Analytics'].includes(roleParam)) {
+      setSelectedRoleType(roleParam);
+    }
+    
+    if (modeParam && ['hire', 'scoped'].includes(modeParam)) {
+      setEngagementMode(modeParam as 'hire' | 'scoped');
+    }
+  }, [searchParams]);
+
+  // Listen for navigation CTA events
+  useEffect(() => {
+    const handleOpenContactModal = () => {
+      openContactModal();
+    };
+
+    window.addEventListener('openContactModal', handleOpenContactModal);
+    return () => window.removeEventListener('openContactModal', handleOpenContactModal);
+  }, []);
+
+  // Parallax effect for Vulcan image
+  useEffect(() => {
+    const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+    let rafId = 0;
+    const onScroll = () => {
+      if (!vulcanSectionRef.current) return;
+      const rect = vulcanSectionRef.current.getBoundingClientRect();
+      const viewportH = window.innerHeight || 1;
+      const sectionCenter = rect.top + rect.height / 2;
+      const viewportCenter = viewportH / 2;
+      const progress = Math.max(-1, Math.min(1, (viewportCenter - sectionCenter) / (rect.height || 1)));
+      const target = progress * 30; // max ±30px pan
+      rafId = window.requestAnimationFrame(() => setVulcanOffset(target));
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll as EventListener);
+      window.removeEventListener('resize', onScroll as EventListener);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
+  
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Floating Navigation */}
+      <FloatingNavigation />
+      
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)}
+        preselectedService={preselectedService}
+      />
+      
+      
+      {/* Hero Section */}
+      <section className="pt-32 md:pt-40 pb-20 bg-gradient-to-br from-background via-accent3-200/10 to-accent1-200/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-5xl md:text-7xl font-bold mb-3">
+            Baz Iyer
+          </h1>
+          <p className="text-2xl md:text-4xl font-semibold text-foreground mb-6">
+            Founder, Product & Data Leader
+          </p>
+          <p className="text-lg md:text-2xl text-foreground/80 mb-8 max-w-3xl mx-auto">
+            I build things and help teams ship, learn and decide fast
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onClick={() => openContactModal()}
+              className="btn-primary cta-glow text-lg"
+            >
+              Schedule a Call
+            </button>
+            <button 
+              onClick={() => openContactModal()}
+              className="btn-secondary text-lg"
+            >
+              Learn More
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-gradient-to-r from-accent1-200/10 to-accent2-200/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-foreground mb-4">About</h2>
+            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+              Product & Data Leader, Entrepreneur and Polymath
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left: Baz image */}
+            <div className="order-1 md:order-none">
+              <img src="/Baz Colour.png" alt="Baz Iyer" className="w-full h-auto rounded-2xl shadow-lg" />
+            </div>
+            {/* Right: Story and achievements */}
+            <div className="order-2 md:order-none">
+              <h3 className="text-2xl font-bold text-foreground mb-4">My Story</h3>
+              <p className="text-foreground/70 mb-6">
+                I&apos;ve spent 7 years building innovative products and teams in London tech companies, including my own startup Vulcan. I enjoy building hands on, as well as managing and coaching others.
+                My specialty is using data and AI to make better decisions. I also love building the capabilities of companies and teams to use these tools.
+              </p>
+              <p className="text-foreground/70 mb-6">
+                My career started as a management consultant at the Boston Consulting Group, and I hold MBA and Law degrees.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                <span className="px-3 py-1 bg-accent1-200/30 text-accent1-600 rounded-full text-sm font-medium">Product Strategy</span>
+                <span className="px-3 py-1 bg-accent2-200/30 text-accent2-600 rounded-full text-sm font-medium">Data & Analytics</span>
+                <span className="px-3 py-1 bg-accent3-200/30 text-accent3-600 rounded-full text-sm font-medium">Team Leadership</span>
+                <span className="px-3 py-1 bg-accent1-200/30 text-accent1-600 rounded-full text-sm font-medium">AI Integration</span>
+              </div>
+              <div className="bg-white/5 dark:bg-black/5 backdrop-blur-sm rounded-xl p-6 border border-accent1-200/30">
+                <h4 className="text-xl font-semibold text-foreground mb-4">Key Achievements</h4>
+                <ul className="space-y-3 text-foreground/70">
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-accent1 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Founded software startup, closed £100k+ in investment and 15 paid business clients</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-accent2 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Led launch of hybrid digital+pharma product from concept to £20K MRR in 6 months</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-accent3 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Built and led data science team and platform at NatWest backed digital bank</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="w-2 h-2 bg-accent1 rounded-full mt-2 flex-shrink-0"></span>
+                    <span>Built energy modelling tooling, including CAD interface and simulation pipeline</span>
+                  </li>
+                </ul>
+                {/* Experience Accordion moved to bottom of About */}
+                <div className="hidden" />
+              </div>
+            </div>
+          </div>
+
+          {/* Show full CV accordion across bottom of About */}
+          <details className="mt-8 group">
+            <summary className="cursor-pointer list-none">
+              <div className="flex items-center justify-between px-5 py-4 bg-white/5 rounded-xl border border-accent1-200/30 hover:bg-white/10 transition-colors">
+                <span className="font-semibold">Show full CV</span>
+                <span className="text-foreground/60 group-open:rotate-180 transition-transform">▾</span>
+              </div>
+            </summary>
+            <div className="mt-6 space-y-6">
+                    {/* HOME ENERGY FOUNDRY */}
+                    <div className="rounded-lg p-4 bg-white/5 border border-accent1-200/30">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h5 className="font-semibold">Founder & CEO</h5>
+                        <span className="text-sm text-foreground/60">2023 – now</span>
+                      </div>
+                      <p className="text-accent1 text-sm mb-2">HOME ENERGY FOUNDRY, London (Pre-seed, usevulcan.app)</p>
+                      <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                        <li>Closed 12 B2B contracts and £110k funding. Closed and executed £50K InnovateUK grant.</li>
+                        <li>Shipped browser-based home energy modelling tool with CAD and visualisation.</li>
+                        <li>Built Energy Assessor Scheme-readiness aligned to MHCLG; authored handbook.</li>
+                      </ul>
+                    </div>
+                    {/* SHUFFLE */}
+                    <div className="rounded-lg p-4 bg-white/5 border border-accent2-200/30">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h5 className="font-semibold">Fractional Product Manager</h5>
+                        <span className="text-sm text-foreground/60">2024 – now</span>
+                      </div>
+                      <p className="text-accent2 text-sm mb-2">SHUFFLE FINANCE, London (Seed, getshuffle.co.uk)</p>
+                      <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                        <li>Developed early financial model and automated ops tooling; launched data product.</li>
+                        <li>Led 3-person team of designers and analysts.</li>
+                      </ul>
+                    </div>
+                    {/* NUMAN */}
+                    <div className="rounded-lg p-4 bg-white/5 border border-accent3-200/30">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h5 className="font-semibold">Lead Product Manager</h5>
+                        <span className="text-sm text-foreground/60">2022</span>
+                      </div>
+                      <p className="text-accent3 text-sm mb-2">NUMAN, London (Series B, numan.com)</p>
+                      <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                        <li>From concept to £20k MRR (~100 customers) in 6 months.</li>
+                        <li>Built and led 9-person cross-functional squad.</li>
+                      </ul>
+                    </div>
+                    {/* METTLE */}
+                    <div className="rounded-lg p-4 bg-white/5 border border-accent1-200/30">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h5 className="font-semibold">Head of Product Strategy and Data Analytics</h5>
+                        <span className="text-sm text-foreground/60">2020 – 2021</span>
+                      </div>
+                      <p className="text-accent1 text-sm mb-2">METTLE by NATWEST GROUP, London (SMB digital banking / BaaS)</p>
+                      <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                        <li>Built/led data function; weekly analytics forum; +600% deposits; 10k→50k customers.</li>
+                      </ul>
+                    </div>
+                    {/* Bó */}
+                    <div className="rounded-lg p-4 bg-white/5 border border-accent2-200/30">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h5 className="font-semibold">New Proposition Lead</h5>
+                        <span className="text-sm text-foreground/60">2019</span>
+                      </div>
+                      <p className="text-accent2 text-sm mb-2">Bó by NATWEST GROUP, London (retail bank - closed)</p>
+                      <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                        <li>Launched digital current account for under 18s (market first by a high street bank).</li>
+                      </ul>
+                    </div>
+                    {/* Loot */}
+                    <div className="rounded-lg p-4 bg-white/5 border border-accent3-200/30">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h5 className="font-semibold">Head of Special Projects</h5>
+                        <span className="text-sm text-foreground/60">2018 – 2019</span>
+                      </div>
+                      <p className="text-accent3 text-sm mb-2">LOOT FINANCIAL SERVICES, London (18–25s app - closed)</p>
+                      <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                        <li>Supported CEO/COO; partnerships, revenue strategy, OKRs; acqui-hire to NatWest.</li>
+                      </ul>
+                    </div>
+                    {/* BCG */}
+                    <div className="rounded-lg p-4 bg-white/5 border border-accent1-200/30">
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <h5 className="font-semibold">Consultant (promoted from Associate)</h5>
+                        <span className="text-sm text-foreground/60">2014 – 2017</span>
+                      </div>
+                      <p className="text-accent1 text-sm mb-2">THE BOSTON CONSULTING GROUP, Australia, Denmark</p>
+                      <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                        <li>Top-decile ratings; £100k+ MBA sponsorship; energy/industrial/public sector work.</li>
+                      </ul>
+                    </div>
+            </div>
+          </details>
+        </div>
+      </section>
+      
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-20 bg-gradient-to-r from-accent2-200/10 to-accent3-200/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-foreground mb-4">Testimonials</h2>
+            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
+              What clients say about working with me
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="bg-background rounded-xl p-6 border border-accent1-200/30">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-accent1 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  OP
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-foreground">Anonymous Mary</h4>
+                  <p className="text-sm text-foreground/60">Fintech CEO & former VC Partner</p>
+                </div>
+              </div>
+              <p className="text-foreground/70 italic">
+                &quot;Baz is a rockstar! And really good at mario kart. He brings the best in people around him, and can solve any problem I throw at him.&quot;
+              </p>
+            </div>
+            
+            <div className="bg-background rounded-xl p-6 border border-accent2-200/30">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-accent2 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  M
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-foreground">Anonymouse Joe</h4>
+                  <p className="text-sm text-foreground/60">Edtech CEO & Rhodes Scholar</p>
+                </div>
+              </div>
+              <p className="text-foreground/70 italic">
+                &quot;Baz taught me everything I know about vibe coding. If you get a chance to work with him, don&apos;t pass. You&apos;ll regret it.&quot;
+              </p>
+            </div>
+            
+            <div className="bg-background rounded-xl p-6 border border-accent3-200/30">
+              <div className="flex items-center mb-4">
+                <div className="w-12 h-12 bg-accent3 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  A
+                </div>
+                <div className="ml-4">
+                  <h4 className="font-semibold text-foreground">Anonymous Al</h4>
+                  <p className="text-sm text-foreground/60">Fractional CPO; Ex Google & Meta</p>
+                </div>
+              </div>
+              <p className="text-foreground/70 italic">
+                &quot;Baz gets things done. He absorbs the chaos and delivers. His teams run well and execute.&quot;
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section removed (now in About accordion) */}
+
+      {/* Vulcan Section (brand-isolated, shorter with parallax) */}
+      <section id="vulcan" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div ref={vulcanSectionRef} className="rounded-2xl overflow-hidden" style={{ backgroundColor: '#1A3437' }}>
+            <div className="grid md:grid-cols-2 items-stretch">
+              {/* Parallax Image */}
+              <div className="relative overflow-hidden h-64 md:h-auto md:min-h-[18rem]">
+                <img src="/vulcan/blackwhitebuilding.jpg" alt="Black & white building" className="absolute inset-0 w-full h-full object-cover will-change-transform" style={{ transform: `translateY(${vulcanOffset}px) scale(1.2)`, transition: 'transform 60ms linear' }} />
+              </div>
+              {/* Content */}
+              <div className="p-8 md:p-10 text-white flex flex-col justify-center">
+                <div className="flex items-center gap-4 mb-6">
+                  <img src="/vulcan/VulcanLogo - large.png" alt="Vulcan logo" className="h-10 w-auto" />
+                </div>
+                <h3 className="text-3xl font-bold mb-4">Vulcan</h3>
+                <p className="text-white/80 mb-6 max-w-prose">
+                  UK homes are polluting and expensive to heat. Vulcan enables home assessment and design professionals to use the Home Energy Model, the future foundation of UK new home standards and Energy Performance Certificates.
+                  <br />
+                  <br />
+                  Unlike existing tools, Vulcan is designed to integrate with existing workflows, be faster and less work to use, and enable assessors to create more value for their clients.
+                </p>
+                <a
+                  href="https://www.usevulcan.app" target="_blank" rel="noopener noreferrer"
+                  className="inline-block px-6 py-3 font-semibold"
+                  style={{ backgroundColor: '#EAFD5A', color: '#1A3437', borderRadius: 'var(--radius-md)' }}
+                >
+                  Visit Vulcan →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Engagements (JSON-driven) - filtered by roleType and mode */}
+      <section id="services" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-foreground mb-4">Engagements</h2>
+            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">Flexible options by type of work</p>
+          </div>
+          
+          {/* Combined Filter Pills - Single Row */}
+          <div className="flex justify-center items-center gap-4 mb-8">
+            {/* Role Type Pills */}
+            {getUniqueRoleTypes().map((roleType) => (
+              <button
+                key={roleType}
+                onClick={() => {
+                  setSelectedRoleType(roleType);
+                  updateUrlParams(roleType, engagementMode);
+                }}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  selectedRoleType === roleType
+                    ? 'bg-accent1 text-white'
+                    : 'bg-white/10 text-foreground hover:bg-white/20'
+                }`}
+              >
+                {roleType}
+              </button>
+            ))}
+            
+            {/* Separator */}
+            <div className="w-px h-6 bg-foreground/20 mx-2"></div>
+            
+            {/* Engagement Mode Pills */}
+            <button
+              onClick={() => {
+                setEngagementMode('hire');
+                updateUrlParams(selectedRoleType, 'hire');
+              }}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                engagementMode === 'hire'
+                  ? 'bg-accent2 text-white'
+                  : 'bg-white/10 text-foreground hover:bg-white/20'
+              }`}
+            >
+              Hire
+            </button>
+            <button
+              onClick={() => {
+                setEngagementMode('scoped');
+                updateUrlParams(selectedRoleType, 'scoped');
+              }}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                engagementMode === 'scoped'
+                  ? 'bg-accent2 text-white'
+                  : 'bg-white/10 text-foreground hover:bg-white/20'
+              }`}
+            >
+              Scoped
+            </button>
+          </div>
+
+          {/* Engagement Cards */}
+          <div className="overflow-x-auto">
+            <div className="flex gap-6 pb-4" style={{ minWidth: 'max-content' }}>
+              {getFilteredEngagements().map((engagement) => (
+                <div key={engagement.id} className="bg-white/5 dark:bg-black/5 backdrop-blur-sm rounded-xl p-6 border border-accent1-200/30 hover:border-accent1-400 transition-colors flex-shrink-0 flex flex-col justify-between" style={{ width: '380px', minHeight: '320px' }}>
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <h4 className="text-lg font-semibold text-foreground">{engagement.name}</h4>
+                      <div className="flex flex-col items-end gap-1">
+                        <span className="px-2 py-1 text-xs rounded-full bg-accent1-200/30 text-accent1-700">{engagement.roleType}</span>
+                        <span className="text-xs text-foreground/60 font-mono">{engagement.timeframe}</span>
+                      </div>
+                    </div>
+                    <p className="text-foreground/70 mb-4">{engagement.summary}</p>
+                    <ul className="text-sm text-foreground/70 space-y-2">
+                      {engagement.deliverables.map((d, i) => (
+                        <li key={i} className="flex items-center gap-2"><span className="w-2 h-2 bg-accent1 rounded-full"></span>{d}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <button 
+                    onClick={() => openContactModal(`${engagement.roleType} - ${engagement.name}`)}
+                    className="w-full btn-primary mt-6"
+                  >
+                    {engagement.ctaText}
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Empty State */}
+          {getFilteredEngagements().length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-foreground/60 mb-4">No engagements available for this combination.</p>
+              <button
+                onClick={() => {
+                  setEngagementMode('hire');
+                  updateUrlParams(selectedRoleType, 'hire');
+                }}
+                className="btn-secondary"
+              >
+                View Hire Options
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+      
+      {/* Contact Section */}
+      <section id="contact" className="py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-foreground mb-4">Ready to Get Started?</h2>
+          <p className="text-xl text-foreground/70 mb-8">
+            Let&apos;s discuss how I can help accelerate your product development
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button 
+              onClick={() => openContactModal()}
+              className="btn-primary cta-glow text-lg"
+            >
+              Schedule a Call
+            </button>
+            <a 
+              href="mailto:bharath.iyer.1@gmail.com?subject=Website%20Message%20from%20Baz%20Iyer&body=Hi%20Baz,%5Cn%5CnI%27d%20like%20to%20get%20in%20touch%20about..."
+              className="btn-secondary text-lg inline-flex items-center justify-center"
+            >
+              Send Message
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      {/* Footer */}
+      <footer className="py-12 border-t border-accent1-200/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <p className="text-foreground/60">
+              © 2025 Baz Iyer. Built with Next.js and Tailwind CSS.
+            </p>
+            <div className="mt-4 flex justify-center gap-6">
+              <a href="https://www.linkedin.com/in/baziyer/" target="_blank" rel="noopener noreferrer" className="text-accent1 hover:text-accent1-600 transition-colors">LinkedIn</a>
+              <a href="https://github.com/baziyer" target="_blank" rel="noopener noreferrer" className="text-accent3 hover:text-accent3-600 transition-colors">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default function DesignTemplatePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="text-foreground">Loading...</div>
+    </div>}>
+      <DesignTemplateContent />
+    </Suspense>
+  );
+}

@@ -1,0 +1,122 @@
+{
+  "engagements": [
+    {
+      "id": "product-fulltime",
+      "roleType": "Product",
+      "timeframe": "Full time",
+      "name": "Product Lead",
+      "summary": "Full-time product leadership and execution",
+      "deliverables": [
+        "Product strategy & roadmap",
+        "Team leadership & hiring",
+        "Cross-functional collaboration"
+      ],
+      "ctaText": "Discuss"
+    },
+    {
+      "id": "product-fractional",
+      "roleType": "Product",
+      "timeframe": "Fractional",
+      "name": "Fractional CPO",
+      "summary": "Part-time executive leadership for product outcomes",
+      "deliverables": [
+        "Quarterly OKRs + roadmap",
+        "Team/process upgrades",
+        "Monthly review + coaching"
+      ],
+      "ctaText": "Discuss"
+    },
+    {
+      "id": "product-6-months",
+      "roleType": "Product",
+      "timeframe": "6 months",
+      "name": "Product Leadership Sprint",
+      "summary": "Hands-on delivery sprint with measurable outcomes",
+      "deliverables": [
+        "Validate product bet",
+        "Instrumented experiment",
+        "Results review & decision memo"
+      ],
+      "ctaText": "Book Sprint"
+    },
+    {
+      "id": "product-1-week",
+      "roleType": "Product",
+      "timeframe": "1 week",
+      "name": "Product Audit",
+      "summary": "Comprehensive process review and improvement plan",
+      "deliverables": [
+        "Product development process review",
+        "Analytics & AI usage audit",
+        "30-60-90 improvement plan"
+      ],
+      "ctaText": "Book Audit"
+    },
+    {
+      "id": "product-1-day",
+      "roleType": "Product",
+      "timeframe": "1 day",
+      "name": "Product Clinic",
+      "summary": "Quick problem-solving session",
+      "deliverables": [
+        "PRD / prototype sketch",
+        "Targeted upskilling",
+        "Next-step checklist"
+      ],
+      "ctaText": "Book Clinic"
+    },
+    {
+      "id": "business-fractional",
+      "roleType": "Business",
+      "timeframe": "Fractional",
+      "name": "Fractional Business Leader",
+      "summary": "Strategic business leadership and execution",
+      "deliverables": [
+        "Business strategy & OKRs",
+        "Go-to-market execution",
+        "Monthly strategic reviews"
+      ],
+      "ctaText": "Discuss"
+    },
+    {
+      "id": "business-6-months",
+      "roleType": "Business",
+      "timeframe": "6 months",
+      "name": "Go-To-Market Build",
+      "summary": "Messaging, packaging, pricing, and pipeline",
+      "deliverables": [
+        "ICP + messaging framework",
+        "Packaging/pricing options",
+        "Pilot plan + metrics"
+      ],
+      "ctaText": "Discuss"
+    },
+    {
+      "id": "data-fractional",
+      "roleType": "Data & Analytics",
+      "timeframe": "Fractional",
+      "name": "Fractional Data Leader",
+      "summary": "Data strategy and team leadership",
+      "deliverables": [
+        "Data strategy & roadmap",
+        "Team building & processes",
+        "Monthly analytics reviews"
+      ],
+      "ctaText": "Discuss"
+    },
+    {
+      "id": "data-1-week",
+      "roleType": "Data & Analytics",
+      "timeframe": "1 week",
+      "name": "Analytics Sprint",
+      "summary": "Instrumentation and KPIs quick pass",
+      "deliverables": [
+        "Current state review",
+        "Event / KPI recommendations",
+        "Tracking plan skeleton"
+      ],
+      "ctaText": "Book Sprint"
+    }
+  ]
+}
+
