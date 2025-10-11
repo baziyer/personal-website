@@ -312,7 +312,7 @@ function DesignTemplateContent() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">Testimonials</h2>
             <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-              What clients say about working with me
+              What others say about working with me
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -321,43 +321,76 @@ function DesignTemplateContent() {
                 <div className="w-12 h-12 bg-accent1 rounded-full flex items-center justify-center text-white font-bold text-lg">
                   OP
                 </div>
-                <div className="ml-4">
-                  <h4 className="font-semibold text-foreground">Anonymous Mary</h4>
+                <div className="ml-4 flex-1">
+                  <h4 className="font-semibold text-foreground">Ollie Purdue</h4>
                   <p className="text-sm text-foreground/60">Fintech CEO & former VC Partner</p>
                 </div>
+                <a 
+                  href="https://www.linkedin.com/in/olliepurdue/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-foreground/60 hover:text-accent1 transition-colors"
+                  title="View LinkedIn Profile"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
               </div>
               <p className="text-foreground/70 italic">
-                &quot;Baz is a rockstar! And really good at mario kart. He brings the best in people around him, and can solve any problem I throw at him.&quot;
+                &quot;Baz levels up everyone around him. Highly analytical, calm under pressure, and my first call for the hardest problems. He creates systems and teams that keep working after he’s gone.&quot;
               </p>
             </div>
             
             <div className="bg-background rounded-xl p-6 border border-accent2-200/30">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-accent2 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                  M
+                  DS
                 </div>
-                <div className="ml-4">
-                  <h4 className="font-semibold text-foreground">Anonymouse Joe</h4>
+                <div className="ml-4 flex-1">
+                  <h4 className="font-semibold text-foreground">Dave Sherwood</h4>
                   <p className="text-sm text-foreground/60">Edtech CEO & Rhodes Scholar</p>
                 </div>
+                <a 
+                  href="https://www.linkedin.com/in/davejlsherwood/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-foreground/60 hover:text-accent2 transition-colors"
+                  title="View LinkedIn Profile"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
               </div>
               <p className="text-foreground/70 italic">
-                &quot;Baz taught me everything I know about vibe coding. If you get a chance to work with him, don&apos;t pass. You&apos;ll regret it.&quot;
+                &quot;Baz is incredibly intelligent and efficient. He gets things done to a high standard and twice as fast as most other people. An A player you want on your team&quot;
               </p>
             </div>
             
             <div className="bg-background rounded-xl p-6 border border-accent3-200/30">
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-accent3 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                  A
+                  TN
                 </div>
-                <div className="ml-4">
-                  <h4 className="font-semibold text-foreground">Anonymous Al</h4>
-                  <p className="text-sm text-foreground/60">Fractional CPO; Ex Google & Meta</p>
+                <div className="ml-4 flex-1">
+                  <h4 className="font-semibold text-foreground">Tim Naylor</h4>
+                  <p className="text-sm text-foreground/60">Advisor, Investor & former Tech executive </p>
                 </div>
+                <a 
+                  href="https://www.linkedin.com/in/timnaylorpublic/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-foreground/60 hover:text-accent3 transition-colors"
+                  title="View LinkedIn Profile"
+                >
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
               </div>
               <p className="text-foreground/70 italic">
-                &quot;Baz gets things done. He absorbs the chaos and delivers. His teams run well and execute.&quot;
+                &quot;Baz brings unique clarity to complex business problems. He is bright, personable and hard working. I have no hesitation recommending him, particularly where time-critical and high-value intervention is required. &quot;
               </p>
             </div>
           </div>
