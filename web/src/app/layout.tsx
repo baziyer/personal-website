@@ -11,8 +11,32 @@ const clashGrotesk = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Baz Iyer - Fractional CPO & Product/Data Advisor",
-  description: "I help teams ship, learn, and decide with data & AI. Fractional CPO, product coaching, and data/AI advisory services.",
+  title: "Baz Iyer - Founder, Product & Data Leader",
+  description: "I build things and help teams ship, learn and decide fast. Product leadership, data strategy, and team coaching.",
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
+  openGraph: {
+    title: "Baz Iyer - Founder, Product & Data Leader",
+    description: "I build things and help teams ship, learn and decide fast. Product leadership, data strategy, and team coaching.",
+    images: [
+      {
+        url: '/open graph.png',
+        width: 1200,
+        height: 630,
+        alt: 'Baz Iyer - Founder, Product & Data Leader',
+      },
+    ],
+    type: 'website',
+    siteName: 'Baz Iyer',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Baz Iyer - Founder, Product & Data Leader",
+    description: "I build things and help teams ship, learn and decide fast. Product leadership, data strategy, and team coaching.",
+    images: ['/open graph.png'],
+  },
 };
 
 export default function RootLayout({
