@@ -173,8 +173,8 @@ function DesignTemplateContent() {
             <div className="order-2 md:order-none">
               <h3 className="text-2xl font-bold text-foreground mb-4">My Story</h3>
               <p className="text-foreground/70 mb-6">
-                I&apos;ve spent 7 years building innovative products and teams in London tech companies, including my own startup Vulcan. I enjoy building hands on, as well as managing and coaching others.
-                My specialty is using data and AI to make better decisions. I also love building the capabilities of companies and teams to use these tools.
+                I&apos;ve spent <b>7 years building innovative products and teams</b> in London tech companies, including my own startup Vulcan. I enjoy building as an IC, as well as managing and coaching others.
+                My specialty is <b>using data and AI to make better decisions</b>, and building the capabilities of companies and teams to use these tools.
               </p>
               <p className="text-foreground/70 mb-6">
                 My career started as a management consultant at the Boston Consulting Group, and I hold MBA and Law degrees.
@@ -190,19 +190,19 @@ function DesignTemplateContent() {
                 <ul className="space-y-3 text-foreground/70">
                   <li className="flex items-start gap-2">
                     <span className="w-2 h-2 bg-accent1 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Founded software startup, closed £100k+ in investment and 15 paid business clients</span>
+                    <span>Built building physics software startup as a solo founder, from concept to recurring revenues from 12 businesses. Raised £110k+ funds</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-2 h-2 bg-accent2 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Led launch of hybrid digital+pharma product from concept to £20K MRR in 6 months</span>
+                    <span>Led launch of weight loss product (combining mobile apps, coaching and GLP-1 medications) from concept to £20K MRR in 6 months</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-2 h-2 bg-accent3 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Built and led data science team and platform at NatWest backed digital bank</span>
+                    <span>Led data science at NatWest digital bank. Oversaw AI/ML products. Led company data review, the best attended meeting outside all hands</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="w-2 h-2 bg-accent1 rounded-full mt-2 flex-shrink-0"></span>
-                    <span>Built energy modelling tooling, including CAD interface and simulation pipeline</span>
+                    <span>Single-handedly built software to model the physics of homes, including CAD data entry, simulation pipeline, and AI-led regulatory & tech stack</span>
                   </li>
                 </ul>
                 {/* Experience Accordion moved to bottom of About */}
@@ -223,26 +223,37 @@ function DesignTemplateContent() {
                     {/* HOME ENERGY FOUNDRY */}
                     <div className="rounded-lg p-4 bg-white/5 border border-accent1-200/30">
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <h5 className="font-semibold">Founder & CEO</h5>
+                        <h5 className="font-semibold">Founder & Director</h5>
                         <span className="text-sm text-foreground/60">2023 – now</span>
                       </div>
-                      <p className="text-accent1 text-sm mb-2">HOME ENERGY FOUNDRY, London (Pre-seed, usevulcan.app)</p>
+                      <p className="text-accent1 text-sm mb-2">
+                        <a href="https://www.usevulcan.app" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-80">
+                          HOME ENERGY FOUNDRY
+                        </a>
+                        , London (Pre-seed, usevulcan.app)
+                      </p>
                       <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
-                        <li>Closed 12 B2B contracts and £110k funding. Closed and executed £50K InnovateUK grant.</li>
-                        <li>Shipped browser-based home energy modelling tool with CAD and visualisation.</li>
-                        <li>Built Energy Assessor Scheme-readiness aligned to MHCLG; authored handbook.</li>
+                        <li>Closed 12 B2B SaaS subscriptions (including Savills) and raised £110k total funding.</li>
+                        <li>Single-handedly built energy modelling software, with CAD, simulation and visualisation features.</li>
+                        <li>Developed AI-driven operating processes aligned to UK Government (MHCLG) requirements.</li>
                       </ul>
                     </div>
                     {/* SHUFFLE */}
                     <div className="rounded-lg p-4 bg-white/5 border border-accent2-200/30">
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <h5 className="font-semibold">Fractional Product Manager</h5>
+                        <h5 className="font-semibold">Fractional Product Lead</h5>
                         <span className="text-sm text-foreground/60">2024 – now</span>
                       </div>
-                      <p className="text-accent2 text-sm mb-2">SHUFFLE FINANCE, London (Seed, getshuffle.co.uk)</p>
+                      <p className="text-accent2 text-sm mb-2">
+                        <a href="https://getshuffle.co.uk" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-80">
+                          SHUFFLE FINANCE
+                        </a>
+                        , London (Seed, getshuffle.co.uk)
+                      </p>
                       <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
-                        <li>Developed early financial model and automated ops tooling; launched data product.</li>
-                        <li>Led 3-person team of designers and analysts.</li>
+                        <li>Developed financial model and automated operations tooling.</li>
+                        <li>Led 3-person team of designers and analysts; developed product roadmap.</li>
+                        <li>Launched data products for business customers, including LLM‑driven analytics.</li>
                       </ul>
                     </div>
                     {/* NUMAN */}
@@ -251,10 +262,15 @@ function DesignTemplateContent() {
                         <h5 className="font-semibold">Lead Product Manager</h5>
                         <span className="text-sm text-foreground/60">2022</span>
                       </div>
-                      <p className="text-accent3 text-sm mb-2">NUMAN, London (Series B, numan.com)</p>
+                      <p className="text-accent3 text-sm mb-2">
+                        <a href="https://numan.com" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-80">
+                          NUMAN
+                        </a>
+                        , London (Series B, numan.com)
+                      </p>
                       <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
-                        <li>From concept to £20k MRR (~100 customers) in 6 months.</li>
-                        <li>Built and led 9-person cross-functional squad.</li>
+                        <li>Led regulated weight loss product (mobile app, on‑demand coaching, GLP‑1 medication) from concept to £20k MRR (~100 paying customers) in 6 months.</li>
+                        <li>Built and led 9‑person cross‑functional squad of doctors, engineers, designers and analysts.</li>
                       </ul>
                     </div>
                     {/* METTLE */}
@@ -263,9 +279,15 @@ function DesignTemplateContent() {
                         <h5 className="font-semibold">Head of Product Strategy and Data Analytics</h5>
                         <span className="text-sm text-foreground/60">2020 – 2021</span>
                       </div>
-                      <p className="text-accent1 text-sm mb-2">METTLE by NATWEST GROUP, London (SMB digital banking / BaaS)</p>
+                      <p className="text-accent1 text-sm mb-2">
+                        <a href="https://mettle.co.uk" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:opacity-80">
+                          METTLE by NATWEST GROUP
+                        </a>
+                        , London (SME digital bank / bank‑as‑a‑service)
+                      </p>
                       <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
-                        <li>Built/led data function; weekly analytics forum; +600% deposits; 10k→50k customers.</li>
+                        <li>Stood up and led data science & analytics: 6 data scientists; platform used by 30% weekly; AI/ML products for fincrime, marketing and customers.</li>
+                        <li>Helped scale from ~10k → 50k business customers; deposits grew +600%.</li>
                       </ul>
                     </div>
                     {/* Bó */}
@@ -274,7 +296,7 @@ function DesignTemplateContent() {
                         <h5 className="font-semibold">New Proposition Lead</h5>
                         <span className="text-sm text-foreground/60">2019</span>
                       </div>
-                      <p className="text-accent2 text-sm mb-2">Bó by NATWEST GROUP, London (retail bank - closed)</p>
+                      <p className="text-accent2 text-sm mb-2">Bó by NATWEST GROUP, London (Full stack digital retail bank – closed)</p>
                       <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
                         <li>Launched digital current account for under 18s (market first by a high street bank).</li>
                       </ul>
@@ -285,7 +307,7 @@ function DesignTemplateContent() {
                         <h5 className="font-semibold">Head of Special Projects</h5>
                         <span className="text-sm text-foreground/60">2018 – 2019</span>
                       </div>
-                      <p className="text-accent3 text-sm mb-2">LOOT FINANCIAL SERVICES, London (18–25s app - closed)</p>
+                      <p className="text-accent3 text-sm mb-2">LOOT FINANCIAL SERVICES, London (Digital banking app for 18–25s – closed)</p>
                       <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
                         <li>Supported CEO/COO; partnerships, revenue strategy, OKRs; acqui-hire to NatWest.</li>
                       </ul>
@@ -300,6 +322,35 @@ function DesignTemplateContent() {
                       <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
                         <li>Top-decile ratings; £100k+ MBA sponsorship; energy/industrial/public sector work.</li>
                       </ul>
+                    </div>
+
+                    {/* Education */}
+                    <div className="pt-2">
+                      <h5 className="font-semibold text-foreground mt-6 mb-2">Education</h5>
+
+                      {/* LBS */}
+                      <div className="rounded-lg p-4 bg-white/5 border border-accent2-200/30">
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="font-medium">London Business School — Masters of Business Administration</span>
+                          <span className="text-sm text-foreground/60">2017 – 2019</span>
+                        </div>
+                        <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                          <li>GMAT 760 (top 1% percentile).</li>
+                          <li>Dean’s List (top 10% of cohort).</li>
+                        </ul>
+                      </div>
+
+                      {/* UWA */}
+                      <div className="rounded-lg p-4 bg-white/5 border border-accent3-200/30 mt-4">
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="font-medium">University of Western Australia — LLB (Hons); BA (Economics)</span>
+                          <span className="text-sm text-foreground/60">2008 – 2013</span>
+                        </div>
+                        <ul className="text-sm text-foreground/70 list-disc ml-5 space-y-1">
+                          <li>Fogarty Foundation scholar (100% tuition + bursary for 6‑year degree).</li>
+                          <li>99.95 entrance exam (top 0.05%); State 1st in Calculus; top 0.5% in Physics, Chemistry and Applicable Mathematics.</li>
+                        </ul>
+                      </div>
                     </div>
             </div>
           </details>
@@ -364,7 +415,7 @@ function DesignTemplateContent() {
                 </a>
               </div>
               <p className="text-foreground/70 italic">
-                &quot;Baz is incredibly intelligent and efficient. He gets things done to a high standard and twice as fast as most other people. An A player you want on your team&quot;
+                &quot;Baz is incredibly intelligent and efficient. He gets things done to a high standard and twice as fast as most other people. An A player you want on your team.&quot;
               </p>
             </div>
             
@@ -375,7 +426,7 @@ function DesignTemplateContent() {
                 </div>
                 <div className="ml-4 flex-1">
                   <h4 className="font-semibold text-foreground">Tim Naylor</h4>
-                  <p className="text-sm text-foreground/60">Advisor, Investor & former Tech executive </p>
+                  <p className="text-sm text-foreground/60">Advisor, Investor, former Tech exec </p>
                 </div>
                 <a 
                   href="https://www.linkedin.com/in/timnaylorpublic/" 
@@ -390,7 +441,7 @@ function DesignTemplateContent() {
                 </a>
               </div>
               <p className="text-foreground/70 italic">
-                &quot;Baz brings unique clarity to complex business problems. He is bright, personable and hard working. I have no hesitation recommending him, particularly where time-critical and high-value intervention is required. &quot;
+                &quot;Baz brings unique clarity to complex business problems. He is bright, personable and hard working. I have no hesitation recommending him, particularly where time-critical and high-value intervention is required.&quot;
               </p>
             </div>
           </div>
