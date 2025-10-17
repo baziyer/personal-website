@@ -1,0 +1,27 @@
+{
+  "principles": [
+    {
+      "id": "ship-to-learn",
+      "title": "Ship to learn",
+      "summary": "Bias to shipping small increments to learn faster than planning.",
+      "topics": ["experimentation", "product", "velocity"],
+      "sources": ["four-steps-to-epiphany", "lean-analytics"]
+    },
+    {
+      "id": "measure-decisions",
+      "title": "Measure decisions, not artifacts",
+      "summary": "Track the impact of decisions; artifacts are intermediate.",
+      "topics": ["metrics", "analytics", "strategy"],
+      "sources": ["good-strategy-bad-strategy"]
+    },
+    {
+      "id": "systems-over-heroics",
+      "title": "Systems over heroics",
+      "summary": "Build processes that work on Monday mornings without you.",
+      "topics": ["operations", "teams", "systems"],
+      "sources": ["high-output-management"]
+    }
+  ]
+}
+
+

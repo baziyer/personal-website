@@ -1,0 +1,42 @@
+{
+  "sources": [
+    {
+      "id": "four-steps-to-epiphany",
+      "title": "The Four Steps to the Epiphany",
+      "type": "book",
+      "author": "Steve Blank",
+      "link": "https://steveblank.com/books/",
+      "topics": ["experimentation", "product"],
+      "takeaway": "Validate learning via customer discovery and iterative release."
+    },
+    {
+      "id": "lean-analytics",
+      "title": "Lean Analytics",
+      "type": "book",
+      "author": "Croll & Yoskovitz",
+      "link": "https://leananalyticsbook.com/",
+      "topics": ["metrics", "analytics"],
+      "takeaway": "Pick the One Metric That Matters per stage to focus effort."
+    },
+    {
+      "id": "good-strategy-bad-strategy",
+      "title": "Good Strategy/Bad Strategy",
+      "type": "book",
+      "author": "Richard Rumelt",
+      "link": "https://goodstrategybadstrategy.com/",
+      "topics": ["strategy"],
+      "takeaway": "Diagnosis → guiding policy → coherent actions; avoid fluff."
+    },
+    {
+      "id": "high-output-management",
+      "title": "High Output Management",
+      "type": "book",
+      "author": "Andy Grove",
+      "link": "https://www.penguinrandomhouse.com/books/",
+      "topics": ["operations", "teams", "systems"],
+      "takeaway": "Design systems and cadences so teams perform consistently."
+    }
+  ]
+}
+
+
