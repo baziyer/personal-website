@@ -7,20 +7,15 @@
 
 import { FloatingNavigation } from '@/components/FloatingNavigation';
 import { ContactModal } from '@/components/ContactModal';
+import { FloatingPrinciples } from '@/components/FloatingPrinciples';
 import { useTheme } from '@/lib/theme/useTheme';
 import { useState, useEffect, useRef, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import engagementsData from '@/data/engagements.json';
 
 function DesignTemplateContent() {
   // theme state consumed implicitly via CSS vars; avoid unused vars for lint
   useTheme();
-  const searchParams = useSearchParams();
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [preselectedService, setPreselectedService] = useState<string | undefined>();
-  // Engagement filtering state
-  const [selectedRoleType, setSelectedRoleType] = useState<string>('Product');
-  const [engagementMode, setEngagementMode] = useState<'hire' | 'scoped'>('hire');
   // Parallax state
   const vulcanSectionRef = useRef<HTMLDivElement>(null);
   const [vulcanOffset, setVulcanOffset] = useState(0);
@@ -30,52 +25,7 @@ function DesignTemplateContent() {
     setIsContactModalOpen(true);
   };
 
-  // Helper functions for engagement filtering
-  const getUniqueRoleTypes = () => {
-    return [...new Set(engagementsData.engagements.map(e => e.roleType))];
-  };
 
-  const getFilteredEngagements = () => {
-    const timeframeOrder = ['Full time', '6 months', 'Fractional', '1 week', '1 day'];
-    const hireTimeframes = ['Full time', 'Fractional'];
-    const scopedTimeframes = ['6 months', '1 week', '1 day'];
-    
-    return engagementsData.engagements
-      .filter(e => e.roleType === selectedRoleType)
-      .filter(e => {
-        if (engagementMode === 'hire') {
-          return hireTimeframes.includes(e.timeframe);
-        } else {
-          return scopedTimeframes.includes(e.timeframe);
-        }
-      })
-      .sort((a, b) => {
-        const aIndex = timeframeOrder.indexOf(a.timeframe);
-        const bIndex = timeframeOrder.indexOf(b.timeframe);
-        return aIndex - bIndex;
-      });
-  };
-
-  const updateUrlParams = (role: string, mode: string) => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('role', role);
-    url.searchParams.set('mode', mode);
-    window.history.replaceState({}, '', url.toString());
-  };
-
-  // Initialize from URL params
-  useEffect(() => {
-    const roleParam = searchParams.get('role');
-    const modeParam = searchParams.get('mode');
-    
-    if (roleParam && ['Product', 'Business', 'Data & Analytics'].includes(roleParam)) {
-      setSelectedRoleType(roleParam);
-    }
-    
-    if (modeParam && ['hire', 'scoped'].includes(modeParam)) {
-      setEngagementMode(modeParam as 'hire' | 'scoped');
-    }
-  }, [searchParams]);
 
   // Listen for navigation CTA events
   useEffect(() => {
@@ -366,83 +316,241 @@ function DesignTemplateContent() {
               What others say about working with me
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-background rounded-xl p-6 border border-accent1-200/30">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-accent1 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                  OP
+          
+          {/* Desktop: Horizontal scroll with 3 visible */}
+          <div className="hidden lg:block">
+            <div className="overflow-x-auto">
+              <div className="flex gap-8 pb-4" style={{ minWidth: 'max-content' }}>
+                <div className="bg-background rounded-xl p-6 border border-accent1-200/30 flex-shrink-0" style={{ width: '380px', minHeight: '320px' }}>
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-accent1 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      OP
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <h4 className="font-semibold text-foreground">Ollie Purdue</h4>
+                      <p className="text-sm text-foreground/60">Fintech CEO & former VC Partner</p>
+                    </div>
+                    <a 
+                      href="https://www.linkedin.com/in/olliepurdue/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-foreground/60 hover:text-accent1 transition-colors"
+                      title="View LinkedIn Profile"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </a>
+                  </div>
+                  <div className="max-h-48 overflow-y-auto">
+                    <p className="text-foreground/70 italic">
+                      &quot;I've worked with Baz at Loot, Bó, and Shuffle. Baz levels up everyone around him. He is highly analytical, calm under pressure, and my first call for the hardest problems. He creates systems and teams that keep working after he's gone.&quot;
+                    </p>
+                  </div>
                 </div>
-                <div className="ml-4 flex-1">
-                  <h4 className="font-semibold text-foreground">Ollie Purdue</h4>
-                  <p className="text-sm text-foreground/60">Fintech CEO & former VC Partner</p>
+                
+                <div className="bg-background rounded-xl p-6 border border-accent2-200/30 flex-shrink-0" style={{ width: '380px', minHeight: '320px' }}>
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-accent2 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      DS
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <h4 className="font-semibold text-foreground">Dave Sherwood</h4>
+                      <p className="text-sm text-foreground/60">Edtech CEO & Rhodes Scholar</p>
+                    </div>
+                    <a 
+                      href="https://www.linkedin.com/in/davejlsherwood/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-foreground/60 hover:text-accent2 transition-colors"
+                      title="View LinkedIn Profile"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </a>
+                  </div>
+                  <div className="max-h-48 overflow-y-auto">
+                    <p className="text-foreground/70 italic">
+                      &quot;I've worked with Baz in BCG, and during university. Baz is incredibly intelligent and efficient. He gets things done to a high standard and twice as fast as most other people. An A player you want on your team.&quot;
+                    </p>
+                  </div>
                 </div>
-                <a 
-                  href="https://www.linkedin.com/in/olliepurdue/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-foreground/60 hover:text-accent1 transition-colors"
-                  title="View LinkedIn Profile"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
-              </div>
-              <p className="text-foreground/70 italic">
-                &quot;Baz levels up everyone around him. Highly analytical, calm under pressure, and my first call for the hardest problems. He creates systems and teams that keep working after he’s gone.&quot;
-              </p>
-            </div>
             
-            <div className="bg-background rounded-xl p-6 border border-accent2-200/30">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-accent2 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                  DS
+                
+                <div className="bg-background rounded-xl p-6 border border-accent3-200/30 flex-shrink-0" style={{ width: '380px', minHeight: '320px' }}>
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-accent3 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      TN
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <h4 className="font-semibold text-foreground">Tim Naylor</h4>
+                      <p className="text-sm text-foreground/60">Advisor, Investor & former Tech exec</p>
+                    </div>
+                    <a 
+                      href="https://www.linkedin.com/in/timnaylorpublic/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-foreground/60 hover:text-accent3 transition-colors"
+                      title="View LinkedIn Profile"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </a>
+                  </div>
+                  <div className="max-h-48 overflow-y-auto">
+                    <p className="text-foreground/70 italic">
+                      &quot;I work with Baz in his venture Vulcan. Baz is able to bring unique clarity within complex business environments – rapidly creating alignment and synergy across financial, regulatory, market, operational and technical domains. He thrives in challenging environments where he can bring focussed, impact-driven action to directly benefit stakeholders. Baz is bright, personable and hard-working. I have no hesitation in recommending Baz for freelance or fractional roles where time-critical, high-value intervention is required.&quot;
+                    </p>
+                  </div>
                 </div>
-                <div className="ml-4 flex-1">
-                  <h4 className="font-semibold text-foreground">Dave Sherwood</h4>
-                  <p className="text-sm text-foreground/60">Edtech CEO & Rhodes Scholar</p>
+
+                <div className="bg-background rounded-xl p-6 border border-accent1-200/30 flex-shrink-0" style={{ width: '380px', minHeight: '320px' }}>
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-accent1 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                      EO
+                    </div>
+                    <div className="ml-4 flex-1">
+                      <h4 className="font-semibold text-foreground">Enzo Ottens</h4>
+                      <p className="text-sm text-foreground/60">Serial Fintech Founder</p>
+                    </div>
+                    <a 
+                      href="https://www.linkedin.com/in/enzo-ottens/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-foreground/60 hover:text-accent1 transition-colors"
+                      title="View LinkedIn Profile"
+                    >
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      </svg>
+                    </a>
+                  </div>
+                  <div className="max-h-48 overflow-y-auto">
+                    <p className="text-foreground/70 italic">
+                      &quot;I've had the pleasure of working with Baz across Loot, Bó, and Shuffle, and he's consistently been one of the most impressive product minds I've worked alongside. Coming from a consulting background, Baz has a rare ability to take complex, ambiguous problems and turn them into clear, structured solutions. He's particularly strong at shaping new propositions — the kind of early-stage, 'how would we launch something in this space?' questions that require both creativity and rigour. Beyond his intellect, Baz is a genuine team player: collaborative, humble, and someone who makes the people around him better. Any team would be lucky to have him.&quot;
+                    </p>
+                  </div>
                 </div>
-                <a 
-                  href="https://www.linkedin.com/in/davejlsherwood/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-foreground/60 hover:text-accent2 transition-colors"
-                  title="View LinkedIn Profile"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
               </div>
-              <p className="text-foreground/70 italic">
-                &quot;Baz is incredibly intelligent and efficient. He gets things done to a high standard and twice as fast as most other people. An A player you want on your team.&quot;
-              </p>
             </div>
-            
-            <div className="bg-background rounded-xl p-6 border border-accent3-200/30">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-accent3 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                  TN
+          </div>
+
+          {/* Mobile: Show all testimonials */}
+          <div className="lg:hidden">
+            <div className="space-y-6">
+              <div className="bg-background rounded-xl p-6 border border-accent1-200/30">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-accent1 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    OP
+                  </div>
+                  <div className="ml-4 flex-1">
+                    <h4 className="font-semibold text-foreground">Ollie Purdue</h4>
+                    <p className="text-sm text-foreground/60">Fintech CEO & former VC Partner</p>
+                  </div>
+                  <a 
+                    href="https://www.linkedin.com/in/olliepurdue/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-foreground/60 hover:text-accent1 transition-colors"
+                    title="View LinkedIn Profile"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </a>
                 </div>
-                <div className="ml-4 flex-1">
-                  <h4 className="font-semibold text-foreground">Tim Naylor</h4>
-                  <p className="text-sm text-foreground/60">Advisor, Investor, former Tech exec </p>
+                <div className="max-h-32 overflow-y-auto">
+                  <p className="text-foreground/70 italic">
+                    &quot;Baz levels up everyone around him. Highly analytical, calm under pressure, and my first call for the hardest problems. He creates systems and teams that keep working after he's gone.&quot;
+                  </p>
                 </div>
-                <a 
-                  href="https://www.linkedin.com/in/timnaylorpublic/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-foreground/60 hover:text-accent3 transition-colors"
-                  title="View LinkedIn Profile"
-                >
-                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
-                </a>
               </div>
-              <p className="text-foreground/70 italic">
-                &quot;Baz brings unique clarity to complex business problems. He is bright, personable and hard working. I have no hesitation recommending him, particularly where time-critical and high-value intervention is required.&quot;
-              </p>
+
+              <div className="bg-background rounded-xl p-6 border border-accent2-200/30">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-accent2 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    DS
+                  </div>
+                  <div className="ml-4 flex-1">
+                    <h4 className="font-semibold text-foreground">Dave Sherwood</h4>
+                    <p className="text-sm text-foreground/60">Edtech CEO & Rhodes Scholar</p>
+                  </div>
+                  <a 
+                    href="https://www.linkedin.com/in/davejlsherwood/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-foreground/60 hover:text-accent2 transition-colors"
+                    title="View LinkedIn Profile"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </a>
+                </div>
+                <div className="max-h-32 overflow-y-auto">
+                  <p className="text-foreground/70 italic">
+                    &quot;Baz is incredibly intelligent and efficient. He gets things done to a high standard and twice as fast as most other people. An A player you want on your team.&quot;
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-background rounded-xl p-6 border border-accent3-200/30">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-accent3 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    TN
+                  </div>
+                  <div className="ml-4 flex-1">
+                    <h4 className="font-semibold text-foreground">Tim Naylor</h4>
+                    <p className="text-sm text-foreground/60">Advisor, Investor & former Tech executive</p>
+                  </div>
+                  <a 
+                    href="https://www.linkedin.com/in/timnaylorpublic/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-foreground/60 hover:text-accent3 transition-colors"
+                    title="View LinkedIn Profile"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </a>
+                </div>
+                <div className="max-h-32 overflow-y-auto">
+                  <p className="text-foreground/70 italic">
+                    &quot;Baz is able to bring unique clarity within complex business environments – rapidly creating alignment and synergy across financial, regulatory, market, operational and technical domains. He thrives in challenging environments where he can bring focussed, impact-driven action to directly benefit stakeholders. Baz is bright, personable and hard-working. I have no hesitation in recommending Baz for freelance or fractional roles where time-critical, high-value intervention is required.&quot;
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-background rounded-xl p-6 border border-accent1-200/30">
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-accent1 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                    EO
+                  </div>
+                  <div className="ml-4 flex-1">
+                    <h4 className="font-semibold text-foreground">Enzo Ottens</h4>
+                    <p className="text-sm text-foreground/60">Serial Fintech Founder</p>
+                  </div>
+                  <a 
+                    href="https://www.linkedin.com/in/enzo-ottens/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-foreground/60 hover:text-accent1 transition-colors"
+                    title="View LinkedIn Profile"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                  </a>
+                </div>
+                <div className="max-h-32 overflow-y-auto">
+                  <p className="text-foreground/70 italic">
+                    &quot;I've had the pleasure of working with Baz across Loot, Bó, and Shuffle, and he's consistently been one of the most impressive product minds I've worked alongside. Coming from a consulting background, Baz has a rare ability to take complex, ambiguous problems and turn them into clear, structured solutions. He's particularly strong at shaping new propositions — the kind of early-stage, 'how would we launch something in this space?' questions that require both creativity and rigour. Beyond his intellect, Baz is a genuine team player: collaborative, humble, and someone who makes the people around him better. Any team would be lucky to have him.&quot;
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -484,121 +592,15 @@ function DesignTemplateContent() {
         </div>
       </section>
       
-      {/* Engagements (JSON-driven) - filtered by roleType and mode */}
-      <section id="services" className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-foreground mb-4">Engagements</h2>
-            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">Flexible options by type of work</p>
-          </div>
-          
-          {/* Combined Filter Pills - Single Row */}
-          <div className="flex justify-center items-center gap-4 mb-8">
-            {/* Role Type Pills */}
-            {getUniqueRoleTypes().map((roleType) => (
-              <button
-                key={roleType}
-                onClick={() => {
-                  setSelectedRoleType(roleType);
-                  updateUrlParams(roleType, engagementMode);
-                }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  selectedRoleType === roleType
-                    ? 'bg-accent1 text-white'
-                    : 'bg-white/10 text-foreground hover:bg-white/20'
-                }`}
-              >
-                {roleType}
-              </button>
-            ))}
-            
-            {/* Separator */}
-            <div className="w-px h-6 bg-foreground/20 mx-2"></div>
-            
-            {/* Engagement Mode Pills */}
-            <button
-              onClick={() => {
-                setEngagementMode('hire');
-                updateUrlParams(selectedRoleType, 'hire');
-              }}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                engagementMode === 'hire'
-                  ? 'bg-accent2 text-white'
-                  : 'bg-white/10 text-foreground hover:bg-white/20'
-              }`}
-            >
-              Hire
-            </button>
-            <button
-              onClick={() => {
-                setEngagementMode('scoped');
-                updateUrlParams(selectedRoleType, 'scoped');
-              }}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                engagementMode === 'scoped'
-                  ? 'bg-accent2 text-white'
-                  : 'bg-white/10 text-foreground hover:bg-white/20'
-              }`}
-            >
-              Scoped
-            </button>
-          </div>
-
-          {/* Engagement Cards */}
-          <div className="overflow-x-auto">
-            <div className="flex gap-6 pb-4" style={{ minWidth: 'max-content' }}>
-              {getFilteredEngagements().map((engagement) => (
-                <div key={engagement.id} className="bg-white/5 dark:bg-black/5 backdrop-blur-sm rounded-xl p-6 border border-accent1-200/30 hover:border-accent1-400 transition-colors flex-shrink-0 flex flex-col justify-between" style={{ width: '380px', minHeight: '320px' }}>
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <h4 className="text-lg font-semibold text-foreground">{engagement.name}</h4>
-                      <div className="flex flex-col items-end gap-1">
-                        <span className="px-2 py-1 text-xs rounded-full bg-accent1-200/30 text-accent1-700">{engagement.roleType}</span>
-                        <span className="text-xs text-foreground/60 font-mono">{engagement.timeframe}</span>
-                      </div>
-                    </div>
-                    <p className="text-foreground/70 mb-4">{engagement.summary}</p>
-                    <ul className="text-sm text-foreground/70 space-y-2">
-                      {engagement.deliverables.map((d, i) => (
-                        <li key={i} className="flex items-center gap-2"><span className="w-2 h-2 bg-accent1 rounded-full"></span>{d}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <button 
-                    onClick={() => openContactModal(`${engagement.roleType} - ${engagement.name}`)}
-                    className="w-full btn-primary mt-6"
-                  >
-                    {engagement.ctaText}
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Empty State */}
-          {getFilteredEngagements().length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-foreground/60 mb-4">No engagements available for this combination.</p>
-              <button
-                onClick={() => {
-                  setEngagementMode('hire');
-                  updateUrlParams(selectedRoleType, 'hire');
-                }}
-                className="btn-secondary"
-              >
-                View Hire Options
-              </button>
-            </div>
-          )}
-        </div>
-      </section>
+      {/* Floating Principles */}
+      <FloatingPrinciples />
       
       {/* Contact Section */}
       <section id="contact" className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Ready to Get Started?</h2>
+          <h2 className="text-4xl font-bold text-foreground mb-4">Work with me</h2>
           <p className="text-xl text-foreground/70 mb-8">
-            Let&apos;s discuss how I can help accelerate your product development
+          Open to Product, Data and Strategy Lead roles on a Full Time, Fractional or Contract basis.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 

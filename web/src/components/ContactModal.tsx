@@ -54,7 +54,7 @@ export function ContactModal({ isOpen, onClose, preselectedService }: ContactMod
     'Product - Product Leadership Sprint',
     'Product - Product Audit',
     'Product - Product Clinic',
-    'Business - Fractional Business Leader',
+    'Business - Fractional Strategy Leader',
     'Business - Go-To-Market Build',
     'Data & Analytics - Fractional Data Leader',
     'Data & Analytics - Analytics Sprint',

@@ -1,7 +1,8 @@
 # Personal Site PRD (Single‑Page, Next.js + Vercel)
 
-Owner: Baz
-Status: Draft v1
+Owner: Baz Iyer / Home Energy Foundry Ltd
+Status: Enhanced Theme System v2
+Domain: homeenergyfoundry.com
 
 ---
 
@@ -89,15 +90,16 @@ Status: Draft v1
 
 **Theme:** Dark default, optional Light toggle. High contrast. Futuristic, minimal.
 
-**Kaleidoscope Design System (core):**
+**Home Energy Foundry Theme System (enhanced):**
 
-* **Palette model:** Base (`--bg`, `--fg`) + 3 accents (`--accent1`, `--accent2`=H+30°, `--accent3`=H+180°). Each gets -600/-400/-200 ramps.
-* **Generation:** Seeded hue from `localStorage` (hash of UA+day). For dark base use HSL `(H,88%,60%)`; for light `(H,70%,45%)`. Derive `accent2`, `accent3` as above. Clamp and sanitize.
+* **Brand Colors:** Primary yellow (#FFD700, ~45°) and complementary blue (#0066CC, ~225°) from Home Energy Foundry Ltd
+* **Palette model:** Base (`--bg`, `--fg`) + 3 accents (`--accent1`=brand primary, `--accent2`=H+30°, `--accent3`=H+180°). Each gets -600/-400/-200 ramps.
+* **Generation:** Default to brand colors, seeded hue from `localStorage` (hash of UA+day). For dark base use HSL `(H,88%,60%)`; for light `(H,70%,45%)`. Derive `accent2`, `accent3` as above. Clamp and sanitize.
 * **Accessibility:** Auto‑adjust L/S to meet AA contrast against base for text, borders, and focus rings. Fallback to safe palette on failure.
 * **Tokens:** Exposed as CSS vars; Tailwind consumes vars. Components never hardcode colors.
-* **Picker (header):** Base: Dark/Light. Randomize color. Mode: Static | Kaleidoscope (slow hue drift). “Copy theme” shares URL with `?base=dark&hue=210&mode=static`. Hue text input deferred.
-* **Kaleidoscope mode:** Rotate hue by +4–6° every ~12s; transitions ≤150ms; paused on scroll; disabled for `prefers-reduced-motion`.
-* **Where color applies:** buttons, links, focus rings, section gradient dividers, subtle background grid tint, icon strokes, CTA glow.
+* **Picker (header):** Base: Dark/Light. Randomize color. Mode: Static | Kaleidoscope (sinusoidal hue drift). "Copy theme" shares URL with `?base=dark&hue=45&mode=static`. Hue text input deferred.
+* **Kaleidoscope mode:** Sinusoidal hue rotation with varying intensity; transitions ≤150ms; paused on scroll; disabled for `prefers-reduced-motion`.
+* **Where color applies:** buttons (with fill animations), links, focus rings, section gradient dividers, subtle background grid tint, icon strokes, CTA glow, micro-interactions.
 * **What stays fixed:** body text, headings, card surfaces, shadows.
 
 **Background & Section Styling:**
@@ -106,7 +108,13 @@ Status: Draft v1
 * Gradient dividers between sections (linear/conic) at low alpha.
 * Light parallax on backgrounds (translate 2–6px).
 
-**Motion:** Section reveal on scroll, micro‑interactions. No cursor trails. No Konami code.
+**Motion:** Section reveal on scroll, micro‑interactions, button fill animations, CTA glow effects. No cursor trails. No Konami code.
+
+**Enhanced Button Interactions:**
+* Fill animations with accent colors on hover/click
+* Glow effects around primary CTAs
+* Smooth state transitions (scale, shadow, color)
+* Micro-interactions for better user feedback
 
 ---
 
@@ -200,7 +208,32 @@ Status: Draft v1
 
 ---
 
-## 13) Delivery Plan
+## 13) Enhanced Implementation Plan
+
+**Phase 1: Core Theme Fixes**
+1. Fix kaleidoscope mode - ensure toggle actually updates colors
+2. Set Home Energy Foundry brand colors as default (yellow #FFD700, blue #0066CC)
+3. Implement sinusoidal animation for kaleidoscope mode
+
+**Phase 2: Enhanced Interactions**
+1. Add button fill animations with accent colors
+2. Implement CTA glow effects
+3. Add micro-interactions and smooth state transitions
+4. Enhanced focus rings with dynamic accent colors
+
+**Phase 3: Background Elements**
+1. Add subtle procedural grid background (Canvas)
+2. Implement gradient dividers between sections
+3. Add light parallax effects on backgrounds
+
+**Phase 4: Advanced Features**
+1. Scroll-triggered animations
+2. Intersection Observer for section reveals
+3. Performance optimizations for animations
+
+---
+
+## 14) Delivery Plan
 
 **Milestone 1: Foundation (Day 1–2)**
 Repo, CI on Vercel, Tailwind, shadcn/ui, base layout, anchors, theme tokens.

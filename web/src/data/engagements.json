@@ -17,7 +17,7 @@
       "id": "product-fractional",
       "roleType": "Product",
       "timeframe": "Fractional",
-      "name": "Fractional CPO",
+      "name": "Fractional Product Lead",
       "summary": "Part-time executive leadership for product outcomes",
       "deliverables": [
         "Quarterly OKRs + roadmap",
@@ -69,7 +69,7 @@
       "id": "business-fractional",
       "roleType": "Business",
       "timeframe": "Fractional",
-      "name": "Fractional Business Leader",
+      "name": "Fractional Strategy Leader",
       "summary": "Strategic business leadership and execution",
       "deliverables": [
         "Business strategy & OKRs",
@@ -88,6 +88,20 @@
         "ICP + messaging framework",
         "Packaging/pricing options",
         "Pilot plan + metrics"
+      ],
+      "ctaText": "Discuss"
+    },
+    {
+      "id": "data-fulltime",
+      "roleType": "Data & Analytics",
+      "timeframe": "Full time",
+      "name": "Data Lead",
+      "summary": "Full-time leadership to build a high-leverage data function.",
+      "deliverables": [
+        "Data strategy, governance and metrics framework",
+        "Analytics platform and self-serve roadmap",
+        "ML/LLM product evaluation and deployment",
+        "Team hiring, coaching and operating cadences"
       ],
       "ctaText": "Discuss"
     },

@@ -1,27 +1,70 @@
 {
   "principles": [
     {
-      "id": "ship-to-learn",
-      "title": "Ship to learn",
-      "summary": "Bias to shipping small increments to learn faster than planning.",
-      "topics": ["experimentation", "product", "velocity"],
-      "sources": ["four-steps-to-epiphany", "lean-analytics"]
+      "id": "emulated-consciousness",
+      "title": "Emulated consciousness",
+      "description": "Consciousness can be emulated on any computational substrate - our minds aren't tied to biological brains but can run on silicon or other platforms.",
+      "readings": ["age-of-em", "fall-or-dodge-in-hell", "permutation-city"]
     },
     {
-      "id": "measure-decisions",
-      "title": "Measure decisions, not artifacts",
-      "summary": "Track the impact of decisions; artifacts are intermediate.",
-      "topics": ["metrics", "analytics", "strategy"],
-      "sources": ["good-strategy-bad-strategy"]
+      "id": "cryptographic-trust",
+      "title": "Cryptographic trust",
+      "description": "Cryptographic proofs enable trust without central authorities - blockchain demonstrates how shared computation can replace traditional intermediaries.",
+      "readings": ["cryptonomicon", "bitcoin-paper"]
     },
     {
-      "id": "systems-over-heroics",
-      "title": "Systems over heroics",
-      "summary": "Build processes that work on Monday mornings without you.",
-      "topics": ["operations", "teams", "systems"],
-      "sources": ["high-output-management"]
+      "id": "post-scarcity-economics",
+      "title": "Post-scarcity economics",
+      "description": "Extreme automation could enable universal abundance where human labor becomes optional rather than necessary.",
+      "readings": ["culture-series"]
+    },
+    {
+      "id": "psychohistory",
+      "title": "Psychohistory",
+      "description": "Large-scale historical patterns become predictable when viewed across civilizations and millennia, though individual events remain chaotic.",
+      "readings": ["foundation-series"]
+    },
+    {
+      "id": "subversive-education",
+      "title": "Subversive Education",
+      "description": "True competitive advantage comes from unconventional thinking; personalized education that challenges mainstream assumptions is the most reliable path to this.",
+      "readings": ["diamond-age"]
+    },
+    {
+      "id": "objectivism",
+      "title": "Objectivism",
+      "description": "Building wealth requires an understanding of the reality of the world (which exists in a non-subjective sense) and the personal effort, self-belief and investment to make this happen.",
+      "readings": ["atlas-shrugged", "fountainhead", "nvidia-way", "shoedog", "invention"]
+    },
+    {
+      "id": "von-neumann-devices",
+      "title": "Von Neumann devices",
+      "description": "Given the physical limitations of space travel, the best way we can collect first hand evidence of the wider universe is through self-sufficient and replicating devices (von Neumann probes).",
+      "readings": ["maniac", "spin"]
+    },
+    {
+      "id": "master-yourself",
+      "title": "Master Yourself",
+      "description": "The key to success is to first master yourself, before learning to improve inter-personal relationships. The latter is window dressing without the former.",
+      "readings": ["7-habits"]
+    },
+    {
+      "id": "master-the-unknown",
+      "title": "Master the Unknown",
+      "description": "Real life is unlike (most) fiction - the enemy is not arbitrarily evil, but unpredictable events with limits on the response time of human ingenuity.",
+      "readings": ["schilds-ladder", "incandescence"]
+    },
+    {
+      "id": "subjective-physics",
+      "title": "Subjective Physics",
+      "description": "Our physical universe and experience is based on our unique subjective perspective, and we see only a fraction of true reality.",
+      "readings": ["order-of-time"]
+    },
+    {
+      "id": "scientific-uncertainty",
+      "title": "Scientific Uncertainty",
+      "description": "The basis of science is both naturalistic explanations for the world, and seeking the evidence to prove existing theories incorrect.",
+      "readings": ["anaximander"]
     }
   ]
 }
-
-
