@@ -344,7 +344,7 @@ function DesignTemplateContent() {
                   </div>
                   <div className="max-h-48 overflow-y-auto">
                     <p className="text-foreground/70 italic">
-                      &quot;I've worked with Baz at Loot, Bó, and Shuffle. Baz levels up everyone around him. He is highly analytical, calm under pressure, and my first call for the hardest problems. He creates systems and teams that keep working after he's gone.&quot;
+                      &quot;I&apos;ve worked with Baz at Loot, Bó, and Shuffle. Baz levels up everyone around him. He is highly analytical, calm under pressure, and my first call for the hardest problems. He creates systems and teams that keep working after he&apos;s gone.&quot;
                     </p>
                   </div>
                 </div>
@@ -372,7 +372,7 @@ function DesignTemplateContent() {
                   </div>
                   <div className="max-h-48 overflow-y-auto">
                     <p className="text-foreground/70 italic">
-                      &quot;I've worked with Baz in BCG, and during university. Baz is incredibly intelligent and efficient. He gets things done to a high standard and twice as fast as most other people. An A player you want on your team.&quot;
+                      &quot;I&apos;ve worked with Baz in BCG, and during university. Baz is incredibly intelligent and efficient. He gets things done to a high standard and twice as fast as most other people. An A player you want on your team.&quot;
                     </p>
                   </div>
                 </div>
@@ -429,7 +429,7 @@ function DesignTemplateContent() {
                   </div>
                   <div className="max-h-48 overflow-y-auto">
                     <p className="text-foreground/70 italic">
-                      &quot;I've had the pleasure of working with Baz across Loot, Bó, and Shuffle, and he's consistently been one of the most impressive product minds I've worked alongside. Coming from a consulting background, Baz has a rare ability to take complex, ambiguous problems and turn them into clear, structured solutions. He's particularly strong at shaping new propositions — the kind of early-stage, 'how would we launch something in this space?' questions that require both creativity and rigour. Beyond his intellect, Baz is a genuine team player: collaborative, humble, and someone who makes the people around him better. Any team would be lucky to have him.&quot;
+                      &quot;I&apos;ve had the pleasure of working with Baz across Loot, Bó, and Shuffle, and he&apos;s consistently been one of the most impressive product minds I&apos;ve worked alongside. Coming from a consulting background, Baz has a rare ability to take complex, ambiguous problems and turn them into clear, structured solutions. He&apos;s particularly strong at shaping new propositions — the kind of early-stage, &apos;how would we launch something in this space?&apos; questions that require both creativity and rigour. Beyond his intellect, Baz is a genuine team player: collaborative, humble, and someone who makes the people around him better. Any team would be lucky to have him.&quot;
                     </p>
                   </div>
                 </div>
@@ -463,7 +463,7 @@ function DesignTemplateContent() {
                 </div>
                 <div className="max-h-32 overflow-y-auto">
                   <p className="text-foreground/70 italic">
-                    &quot;Baz levels up everyone around him. Highly analytical, calm under pressure, and my first call for the hardest problems. He creates systems and teams that keep working after he's gone.&quot;
+                    &quot;Baz levels up everyone around him. Highly analytical, calm under pressure, and my first call for the hardest problems. He creates systems and teams that keep working after he&apos;s gone.&quot;
                   </p>
                 </div>
               </div>
@@ -547,7 +547,7 @@ function DesignTemplateContent() {
                 </div>
                 <div className="max-h-32 overflow-y-auto">
                   <p className="text-foreground/70 italic">
-                    &quot;I've had the pleasure of working with Baz across Loot, Bó, and Shuffle, and he's consistently been one of the most impressive product minds I've worked alongside. Coming from a consulting background, Baz has a rare ability to take complex, ambiguous problems and turn them into clear, structured solutions. He's particularly strong at shaping new propositions — the kind of early-stage, 'how would we launch something in this space?' questions that require both creativity and rigour. Beyond his intellect, Baz is a genuine team player: collaborative, humble, and someone who makes the people around him better. Any team would be lucky to have him.&quot;
+                    &quot;I&apos;ve had the pleasure of working with Baz across Loot, Bó, and Shuffle, and he&apos;s consistently been one of the most impressive product minds I&apos;ve worked alongside. Coming from a consulting background, Baz has a rare ability to take complex, ambiguous problems and turn them into clear, structured solutions. He&apos;s particularly strong at shaping new propositions — the kind of early-stage, &apos;how would we launch something in this space?&apos; questions that require both creativity and rigour. Beyond his intellect, Baz is a genuine team player: collaborative, humble, and someone who makes the people around him better. Any team would be lucky to have him.&quot;
                   </p>
                 </div>
               </div>

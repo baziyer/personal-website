@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import principlesData from "@/data/principles.json";
 import sourcesData from "@/data/sources.json";
 
@@ -29,7 +28,7 @@ export default function PrinciplesPage() {
     <div className="min-h-screen py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Ideas I'm interested in</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Ideas I&apos;m interested in</h1>
           <p className="text-foreground/70 max-w-2xl mx-auto">
             Beliefs, operating heuristics, and the ideas I return to. Click on any principle to explore related readings.
           </p>

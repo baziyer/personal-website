@@ -50,8 +50,6 @@ export function useTheme() {
   useEffect(() => {
     if (typeof document === 'undefined') return;
     
-    const root = document.documentElement;
-    
     console.log('Kaleidoscope mode change:', { mode: theme.mode });
     
     if (theme.mode === 'kaleidoscope') {
@@ -69,7 +67,6 @@ export function useTheme() {
   const startKaleidoscope = () => {
     if (kaleidoscopeRef.current) return; // Already running
     
-    const root = document.documentElement;
     let hue = 0;
     const targetHues = [0, 60, 120, 180, 240, 300];
     let targetIndex = 0;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import principlesData from '@/data/principles.json';
 import sourcesData from '@/data/sources.json';
 
@@ -287,7 +287,7 @@ export function FloatingPrinciples() {
     <section className="py-20 relative overflow-hidden min-h-[600px] bg-gradient-to-b from-transparent to-background/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">Ideas I'm interested in</h2>
+          <h2 className="text-4xl font-bold text-foreground mb-4">Ideas I&apos;m interested in</h2>
         </div>
       </div>
 
