@@ -288,6 +288,9 @@ export function FloatingPrinciples() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">Ideas I&apos;m interested in</h2>
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+            I&apos;m interested in a wide range of ideas - here are some of them, as well as some starter reading to understand them better.
+          </p>
         </div>
       </div>
 
